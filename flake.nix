@@ -63,6 +63,13 @@
             }
           ];
         };
+        hydra = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = attrs;
+          modules = [
+            ./machines/hydra.nix
+          ];
+        };
         iso = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = attrs;

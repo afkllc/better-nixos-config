@@ -8,16 +8,30 @@
     useSubstitutes = true;
   };
 
-  nix.buildMachines = [
-    { hostName = "localhost";
-      protocol = null;
-      system = "x86_64-linux";
-      supportedFeatures = ["kvm" "nixos-test" "big-parallel" "benchmark"];
-      maxJobs = 1;
-    }
-  ];
+  nix.
 
-  nix.settings.extra-experimental-features = "nix-command flakes";
+  nix = {
+    buildMachines = [
+      { hostName = "localhost";
+        protocol = null;
+        system = "x86_64-linux";
+        supportedFeatures = ["kvm" "nixos-test" "big-parallel" "benchmark"];
+        maxJobs = 1;
+      }
+      {
+        hostName = "localhost";
+        protocol = null;
+        system = "aarch64-linux";
+        supportedFeatures = ["kvm" "nixos-test" "big-parallel" "benchmark"];
+        maxJobs = 1;
+      }
+    ];
+    settings = {
+      extra-experimental-features = "nix-command flakes";
+      supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
+    };
+  };
+
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   users.users.root.initialPassword = "";

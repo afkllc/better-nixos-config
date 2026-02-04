@@ -1,5 +1,6 @@
 { pkgs, lib, ... }:
 {
+  imports = [ ../hardware/generic.nix ];
   services.hydra = {
     enable = true;
     hydraURL = "http://localhost:3000";

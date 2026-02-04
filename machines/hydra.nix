@@ -8,8 +8,6 @@
     useSubstitutes = true;
   };
 
-  nix.
-
   nix = {
     buildMachines = [
       { hostName = "localhost";

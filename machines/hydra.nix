@@ -26,7 +26,6 @@
     ];
     settings = {
       extra-experimental-features = "nix-command flakes";
-      supportedSystems = [ "x86_64-linux" "aarch64-linux" ];
     };
   };
 

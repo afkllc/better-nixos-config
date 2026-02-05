@@ -2,12 +2,6 @@
 {
   imports = [ ../hardware/generic.nix ];
 
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-label/hydra";
-    fsType = "ext4";
-    neededForBoot = true;
-  };
-
   services.hydra = {
     enable = true;
     hydraURL = "http://localhost:3000";
@@ -34,23 +28,27 @@
 
   nix = {
     buildMachines = [
-      { hostName = "localhost";
+      { hostName = "localhost-x86";
         protocol = null;
         system = "x86_64-linux";
         supportedFeatures = ["kvm" "nixos-test" "big-parallel" "benchmark"];
-        maxJobs = 1;
+        maxJobs = 2;
       }
       {
-        hostName = "localhost";
+        hostName = "localhost-arm";
         protocol = null;
         system = "aarch64-linux";
         supportedFeatures = ["kvm" "nixos-test" "big-parallel" "benchmark"];
-        maxJobs = 1;
+        maxJobs = 2;
       }
     ];
     settings = {
       extra-experimental-features = "nix-command flakes";
     };
+  };
+
+  networking.hosts = {
+    "127.0.0.1" = ["localhost-x86" "localhost-arm"];
   };
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];

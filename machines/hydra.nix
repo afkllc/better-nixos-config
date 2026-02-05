@@ -1,6 +1,13 @@
 { pkgs, lib, ... }:
 {
   imports = [ ../hardware/generic.nix ];
+
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-label/hydra";
+    fsType = "ext4";
+    neededForBoot = true;
+  };
+
   services.hydra = {
     enable = true;
     hydraURL = "http://localhost:3000";

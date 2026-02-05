@@ -32,14 +32,14 @@
         protocol = null;
         system = "x86_64-linux";
         supportedFeatures = ["kvm" "nixos-test" "big-parallel" "benchmark"];
-        maxJobs = 2;
+        maxJobs = 1;
       }
       {
         hostName = "localhost-arm";
         protocol = null;
         system = "aarch64-linux";
         supportedFeatures = ["kvm" "nixos-test" "big-parallel" "benchmark"];
-        maxJobs = 2;
+        maxJobs = 1;
       }
     ];
     settings = {

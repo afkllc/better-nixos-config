@@ -8,6 +8,10 @@
     useSubstitutes = true;
   };
 
+  environment.systemPackages = with pkgs; [ git ];
+
+  system.stateVersion = "26.05";
+
   systemd.services.issue-ip = {
     description = "Generate /etc/issue with IP info";
     wantedBy = [ "multi-user.target" ];
@@ -16,7 +20,7 @@
     serviceConfig = {
       Type = "oneshot";
       ExecStart = ''
-        ${pkgs.iproute2}/bin/ip a > /etc/issue
+        "${pkgs.busybox}/bin/sh -c '${pkgs.iproute2}/bin/ip a > /run/issue'"
       '';
     };
   };

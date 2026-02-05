@@ -28,14 +28,14 @@
 
   nix = {
     buildMachines = [
-      { hostName = "localhost-x86";
+      { hostName = "localhost";
         protocol = null;
         system = "x86_64-linux";
         supportedFeatures = ["kvm" "nixos-test" "big-parallel" "benchmark"];
         maxJobs = 1;
       }
       {
-        hostName = "localhost-arm";
+        hostName = "127.0.0.1";
         protocol = null;
         system = "aarch64-linux";
         supportedFeatures = ["kvm" "nixos-test" "big-parallel" "benchmark"];
@@ -45,11 +45,6 @@
     settings = {
       extra-experimental-features = "nix-command flakes";
     };
-  };
-
-  networking.hosts = {
-    "127.0.0.2" = ["localhost-x86"];
-    "127.0.0.3" = ["localhost-arm"];
   };
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];

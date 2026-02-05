@@ -19,7 +19,7 @@
 
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = pkgs.writeShellScript 'issue-ip' ''
+      ExecStart = pkgs.writeShellScript "issue-ip" ''
         ${pkgs.iproute2}/bin/ip a > /run/issue
       '';
     };

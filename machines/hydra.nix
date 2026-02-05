@@ -8,6 +8,19 @@
     useSubstitutes = true;
   };
 
+  systemd.services.issue-ip = {
+    description = "Generate /etc/issue with IP info";
+    wantedBy = [ "multi-user.target" ];
+    before = [ "getty@tty1.service" ];
+
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = ''
+        ${pkgs.iproute2}/bin/ip a > /etc/issue
+      '';
+    };
+  };
+
   nix = {
     buildMachines = [
       { hostName = "localhost";

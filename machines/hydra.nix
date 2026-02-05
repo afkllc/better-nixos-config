@@ -19,8 +19,8 @@
 
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = ''
-        "${pkgs.busybox}/bin/sh -c '${pkgs.iproute2}/bin/ip a > /run/issue'"
+      ExecStart = pkgs.writeShellScript 'issue-ip' ''
+        ${pkgs.iproute2}/bin/ip a > /run/issue
       '';
     };
   };

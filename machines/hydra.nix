@@ -28,14 +28,14 @@
 
   nix = {
     buildMachines = [
-      { hostName = "localhost";
+      { hostName = "127.0.0.5";
         protocol = null;
         system = "x86_64-linux";
         supportedFeatures = ["kvm" "nixos-test" "big-parallel" "benchmark"];
         maxJobs = 1;
       }
       {
-        hostName = "hydra";
+        hostName = "127.0.0.6";
         protocol = null;
         system = "aarch64-linux";
         supportedFeatures = ["kvm" "nixos-test" "big-parallel" "benchmark"];

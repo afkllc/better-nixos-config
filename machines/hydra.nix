@@ -48,7 +48,8 @@
   };
 
   networking.hosts = {
-    "127.0.0.1" = ["localhost-x86" "localhost-arm"];
+    "127.0.0.2" = ["localhost-x86"];
+    "127.0.0.3" = ["localhost-arm"];
   };
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];

@@ -35,7 +35,7 @@
         maxJobs = 1;
       }
       {
-        hostName = "127.0.0.1";
+        hostName = "hydra";
         protocol = null;
         system = "aarch64-linux";
         supportedFeatures = ["kvm" "nixos-test" "big-parallel" "benchmark"];

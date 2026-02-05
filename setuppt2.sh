@@ -90,6 +90,7 @@ mkswap -f -L swap "$swap"
 # Mounting
 #-------------------------
 echo "Mounting disks..."
+sleep 2
 mount /dev/disk/by-label/nixos /mnt
 mkdir -p /mnt/boot
 mount /dev/disk/by-label/boot /mnt/boot
@@ -106,7 +107,7 @@ git clone --depth 1 --branch "$branch" \
 
 nixos-install --flake "/mnt/etc/nixos#$config" --no-root-password
 
-echo "root:$ROOT_PASSWORD" | nixos-enter -c chpasswd
+echo "root:$ROOT_PASSWORD" | nixos-enter -c "chpasswd"
 
 #-------------------------
 # Reboot

@@ -70,6 +70,13 @@
             ./machines/hydra.nix
           ];
         };
+        hydra-disklabel-hydra = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = attrs;
+          modules = [
+            ./machines/hydra-disklabel-hydra.nix
+          ];
+        };
         iso = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = attrs;

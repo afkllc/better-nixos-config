@@ -28,16 +28,9 @@
 
   nix = {
     buildMachines = [
-      { hostName = "127.0.0.5";
+      { hostName = "localhost";
         protocol = null;
         system = "x86_64-linux";
-        supportedFeatures = ["kvm" "nixos-test" "big-parallel" "benchmark"];
-        maxJobs = 1;
-      }
-      {
-        hostName = "127.0.0.6";
-        protocol = null;
-        system = "aarch64-linux";
         supportedFeatures = ["kvm" "nixos-test" "big-parallel" "benchmark"];
         maxJobs = 1;
       }

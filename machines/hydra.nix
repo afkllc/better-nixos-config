@@ -33,7 +33,13 @@
 
   nix = {
     buildMachines = [
-      { hostName = "localhost";
+      { hostName = "127.0.0.5";
+        protocol = null;
+        system = "x86_64-linux";
+        supportedFeatures = ["kvm" "nixos-test" "big-parallel" "benchmark"];
+        maxJobs = 1;
+      }
+      { hostName = "127.0.0.6";
         protocol = null;
         system = "aarch64-linux";
         supportedFeatures = ["kvm" "nixos-test" "big-parallel" "benchmark"];
@@ -44,6 +50,42 @@
       extra-experimental-features = "nix-command flakes";
     };
   };
+
+  environment.etc."ssh/sshd_config_127_5" = {
+    text = ''
+      Port 22
+      ListenAddress 127.0.0.5
+      HostKey /etc/ssh/ssh_host_rsa_127_5
+      PidFile /run/sshd_127_5.pid
+      # other defaults you want
+      PermitRootLogin no
+      PasswordAuthentication yes
+    '';
+    mode = "0644";
+  };
+
+  environment.etc."ssh/sshd_config_127_6" = {
+    text = ''
+      Port 22
+      ListenAddress 127.0.0.6
+      HostKey /etc/ssh/ssh_host_rsa_127_6
+      PidFile /run/sshd_127_6.pid
+      PermitRootLogin no
+      PasswordAuthentication yes
+    '';
+    mode = "0644";
+  };
+
+  system.activationScripts.sshExtraKeys.text = ''
+    for ip in 127.0.0.5 127.0.0.6; do
+      keyfile="/etc/ssh/ssh_host_rsa_${ip//./_}"
+      if [ ! -f "$keyfile" ]; then
+        echo "Generating host key for $ip..."
+        ${pkgs.openssh}/bin/ssh-keygen -t rsa -f "$keyfile" -N "" >/dev/null
+      fi
+    done
+  '';
+
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 

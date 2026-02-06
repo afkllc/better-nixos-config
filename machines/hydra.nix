@@ -9,6 +9,11 @@
     useSubstitutes = true;
   };
 
+  services.nix-serve = {
+    enable = true;
+    secretKeyFile = "/var/cache-priv-key.pem";
+  };
+
   environment.systemPackages = with pkgs; [ git ];
 
   system.stateVersion = "26.05";
@@ -30,7 +35,7 @@
     buildMachines = [
       { hostName = "localhost";
         protocol = null;
-        system = "x86_64-linux";
+        system = "aarch64-linux";
         supportedFeatures = ["kvm" "nixos-test" "big-parallel" "benchmark"];
         maxJobs = 1;
       }

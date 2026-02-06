@@ -76,21 +76,36 @@
     mode = "0644";
   };
 
-  systemd.services.ssh-extra-keys = {
-    description = "Generate extra ssh keys";
+  systemd.services.ssh-extra-key-127-5 = {
+    description = "Generate SSH host key for 127.0.0.5";
     wantedBy = [ "multi-user.target" ];
     before = [ "getty@tty1.service" ];
-
+  
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = pkgs.writeShellScript "extra-ssh-keys" ''
-        for ip in 127.0.0.5 127.0.0.6; do
-          keyfile="/etc/ssh/ssh_host_rsa_${ip//./_}"
-          if [ ! -f "$keyfile" ]; then
-            echo "Generating host key for $ip..."
-            ${pkgs.openssh}/bin/ssh-keygen -t rsa -f "$keyfile" -N "" >/dev/null
-          fi
-        done
+      ExecStart = ''
+        keyfile="/etc/ssh/ssh_host_rsa_127_5"
+        if [ ! -f "$keyfile" ]; then
+          echo "Generating host key for 127.0.0.5..."
+          ${pkgs.openssh}/bin/ssh-keygen -t rsa -f "$keyfile" -N "" >/dev/null
+        fi
+      '';
+    };
+  };
+
+  systemd.services.ssh-extra-key-127-6 = {
+    description = "Generate SSH host key for 127.0.0.6";
+    wantedBy = [ "multi-user.target" ];
+    before = [ "getty@tty1.service" ];
+  
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = ''
+        keyfile="/etc/ssh/ssh_host_rsa_127_6"
+        if [ ! -f "$keyfile" ]; then
+          echo "Generating host key for 127.0.0.6..."
+          ${pkgs.openssh}/bin/ssh-keygen -t rsa -f "$keyfile" -N "" >/dev/null
+        fi
       '';
     };
   };

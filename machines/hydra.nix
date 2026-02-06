@@ -51,7 +51,7 @@
 
   networking.useDHCP = lib.mkDefault true;
   networking.networkmanager.enable = true;
-  networking.firewall.allowedTCPPorts = [ 3000 ];
+  networking.firewall.allowedTCPPorts = [ 3000 5000 ];
 
   services.openssh.enable = true;
   services.openssh.settings.PermitRootLogin = "yes";

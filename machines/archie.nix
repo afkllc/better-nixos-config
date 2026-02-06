@@ -18,6 +18,7 @@
     ../programs/networking.nix
     ../programs/desktop.nix
     ../programs/flatpak.nix
+    ../programs/cachix.nix
   ];
 
   services.avahi = {

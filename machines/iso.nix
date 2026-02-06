@@ -5,6 +5,10 @@
   ...
 }:
 {
+  imports = [
+    ../programs/cachix.nix
+  ];
+  
   environment.systemPackages = with pkgs; [
     git
   ];

@@ -83,7 +83,7 @@
   
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = ''
+      ExecStart = pkgs.writeShellScript "ssh-extra-key-127-5" ''
         keyfile="/etc/ssh/ssh_host_rsa_127_5"
         if [ ! -f "$keyfile" ]; then
           echo "Generating host key for 127.0.0.5..."
@@ -100,7 +100,7 @@
   
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = ''
+      ExecStart = pkgs.writeShellScript "ssh-extra-key-127-6" ''
         keyfile="/etc/ssh/ssh_host_rsa_127_6"
         if [ ! -f "$keyfile" ]; then
           echo "Generating host key for 127.0.0.6..."

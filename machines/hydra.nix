@@ -142,7 +142,7 @@
 
   users.users.sshd = {
     description = "SSH daemon user";
-    systemUser = true;
+    isSystemUser = true;
     createHome = false;
     shell = pkgs.bash;
   };

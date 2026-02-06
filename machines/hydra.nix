@@ -118,8 +118,25 @@
   networking.networkmanager.enable = true;
   networking.firewall.allowedTCPPorts = [ 3000 5000 ];
 
-  services.openssh.enable = true;
-  services.openssh.settings.PermitRootLogin = "yes";
+  systemd.services.sshd1275 = {
+    enable = true;
+    description = "OpenSSH Server on 127.0.0.5";
+    after = [ "network.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.openssh}/bin/sshd -D -f /etc/ssh/sshd_config_127_5";
+      Restart = "always";
+    };
+  };
+  
+  systemd.services.sshd1276 = {
+    enable = true;
+    description = "OpenSSH Server on 127.0.0.6";
+    after = [ "network.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.openssh}/bin/sshd -D -f /etc/ssh/sshd_config_127_6";
+      Restart = "always";
+    };
+  };
 
   virtualisation.docker.enable = true;
 

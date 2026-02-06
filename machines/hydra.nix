@@ -140,6 +140,13 @@
 
   virtualisation.docker.enable = true;
 
+  users.users.sshd = {
+    description = "SSH daemon user";
+    systemUser = true;
+    createHome = false;
+    shell = pkgs.bash;
+  };
+
   system.autoUpgrade.flake = lib.mkForce "git+https://github.com/iLikeToCode/nixos-config#hydra";
 
   networking.hostName = "hydra";

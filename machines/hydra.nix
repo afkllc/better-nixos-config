@@ -76,16 +76,24 @@
     mode = "0644";
   };
 
-  system.activationScripts.sshExtraKeys.text = ''
-    for ip in 127.0.0.5 127.0.0.6; do
-      keyfile="/etc/ssh/ssh_host_rsa_${ip//./_}"
-      if [ ! -f "$keyfile" ]; then
-        echo "Generating host key for $ip..."
-        ${pkgs.openssh}/bin/ssh-keygen -t rsa -f "$keyfile" -N "" >/dev/null
-      fi
-    done
-  '';
+  systemd.services.ssh-extra-keys = {
+    description = "Generate extra ssh keys";
+    wantedBy = [ "multi-user.target" ];
+    before = [ "getty@tty1.service" ];
 
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = pkgs.writeShellScript "extra-ssh-keys" ''
+        for ip in 127.0.0.5 127.0.0.6; do
+          keyfile="/etc/ssh/ssh_host_rsa_${ip//./_}"
+          if [ ! -f "$keyfile" ]; then
+            echo "Generating host key for $ip..."
+            ${pkgs.openssh}/bin/ssh-keygen -t rsa -f "$keyfile" -N "" >/dev/null
+          fi
+        done
+      '';
+    };
+  };
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 

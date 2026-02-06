@@ -1,6 +1,6 @@
 { pkgs, webots, ... }:
 {
     environment.systemPackages = [
-        webots.packages.x86_64-linux.default
+        self.packages.x86_64-linux.webots
     ];
 }

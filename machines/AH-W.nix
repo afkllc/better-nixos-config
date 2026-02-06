@@ -1,4 +1,4 @@
-{ pkgs, lib, webots, ... }:
+{ pkgs, lib, self, ... }:
 {
   imports = [
     ./archie.nix

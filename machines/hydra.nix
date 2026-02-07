@@ -34,20 +34,9 @@
   nix = {
     buildMachines = [
       {
-        hostName = "127.0.0.5";
-        protocol = "ssh";
-        sshUser = "hydra";
-        sshKey = "/var/lib/hydra/.ssh/id_ed25519";
-        system = "x86_64-linux";
-        supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-        maxJobs = 1;
-      }
-      {
-        hostName = "127.0.0.6";
-        protocol = "ssh";
-        sshUser = "hydra";
-        sshKey = "/var/lib/hydra/.ssh/id_ed25519";
-        system = "aarch64-linux";
+        hostName = "localhost";
+        protocol = null;
+        systems = [ "x86_64-linux" "aarch64-linux" ];
         supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
         maxJobs = 1;
       }
@@ -57,62 +46,13 @@
     };
   };
 
-  system.activationScripts.hydraSSHKey = {
-    deps = [ "users" ];
-    text = ''
-      set -e
-
-      keydir=/var/lib/hydra/.ssh
-      keyfile=$keydir/id_ed25519
-
-      if [ ! -f "$keyfile" ]; then
-        echo "Generating Hydra SSH key…"
-        mkdir -p "$keydir"
-        chmod 700 "$keydir"
-
-        ${pkgs.openssh}/bin/ssh-keygen \
-          -t ed25519 \
-          -N "" \
-          -f "$keyfile"
-
-        chmod 600 "$keyfile"
-        chmod 644 "$keyfile.pub"
-        chown -R hydra:hydra /var/lib/hydra/.ssh
-      fi
-    '';
-  };
-
-  system.activationScripts.hydraAuthorizedKey = {
-    deps = [ "hydraSSHKey" ];
-    text = ''
-      set -e
-
-      ak=/var/lib/hydra/.ssh/authorized_keys
-      pub=/var/lib/hydra/.ssh/id_ed25519.pub
-
-      if [ -f "$pub" ]; then
-        mkdir -p "$(dirname "$ak")"
-        touch "$ak"
-
-        if ! grep -qxF "$(cat "$pub")" "$ak"; then
-          cat "$pub" >> "$ak"
-        fi
-
-        chmod 600 "$ak"
-        chown hydra:hydra "$ak"
-      fi
-    '';
-  };
-
-  services.sshd.enable = true;
-
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   users.users.root.initialPassword = "";
 
   networking.useDHCP = lib.mkDefault true;
   networking.networkmanager.enable = true;
-  networking.firewall.allowedTCPPorts = [ 22 3000 5000 ];
+  networking.firewall.allowedTCPPorts = [ 3000 5000 ];
 
   virtualisation.docker.enable = true;
 

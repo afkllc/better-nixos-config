@@ -60,6 +60,8 @@
       # other defaults you want
       PermitRootLogin yes
       PasswordAuthentication yes
+      PubkeyAuthentication yes
+      UsePAM yes
     '';
     mode = "0644";
   };
@@ -72,6 +74,8 @@
       PidFile /run/sshd_127_8.pid
       PermitRootLogin yes
       PasswordAuthentication yes
+      PubkeyAuthentication yes
+      UsePAM yes
     '';
     mode = "0644";
   };

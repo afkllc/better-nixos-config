@@ -104,13 +104,15 @@
     '';
   };
 
+  services.sshd.enable = true;
+
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   users.users.root.initialPassword = "";
 
   networking.useDHCP = lib.mkDefault true;
   networking.networkmanager.enable = true;
-  networking.firewall.allowedTCPPorts = [ 3000 5000 ];
+  networking.firewall.allowedTCPPorts = [ 22 3000 5000 ];
 
   virtualisation.docker.enable = true;
 

@@ -58,7 +58,7 @@
       HostKey /etc/ssh/ssh_host_rsa_127_7
       PidFile /run/sshd_127_7.pid
       # other defaults you want
-      PermitRootLogin no
+      PermitRootLogin yes
       PasswordAuthentication yes
     '';
     mode = "0644";
@@ -70,7 +70,7 @@
       ListenAddress 127.0.0.8
       HostKey /etc/ssh/ssh_host_rsa_127_8
       PidFile /run/sshd_127_8.pid
-      PermitRootLogin no
+      PermitRootLogin yes
       PasswordAuthentication yes
     '';
     mode = "0644";

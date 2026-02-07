@@ -33,13 +33,13 @@
 
   nix = {
     buildMachines = [
-      { hostName = "127.0.0.5";
+      { hostName = "127.0.0.7";
         protocol = null;
         system = "x86_64-linux";
         supportedFeatures = ["kvm" "nixos-test" "big-parallel" "benchmark"];
         maxJobs = 1;
       }
-      { hostName = "127.0.0.6";
+      { hostName = "127.0.0.8";
         protocol = null;
         system = "aarch64-linux";
         supportedFeatures = ["kvm" "nixos-test" "big-parallel" "benchmark"];
@@ -51,12 +51,12 @@
     };
   };
 
-  environment.etc."ssh/sshd_config_127_5" = {
+  environment.etc."ssh/sshd_config_127_7" = {
     text = ''
       Port 22
-      ListenAddress 127.0.0.5
-      HostKey /etc/ssh/ssh_host_rsa_127_5
-      PidFile /run/sshd_127_5.pid
+      ListenAddress 127.0.0.7
+      HostKey /etc/ssh/ssh_host_rsa_127_7
+      PidFile /run/sshd_127_7.pid
       # other defaults you want
       PermitRootLogin no
       PasswordAuthentication yes
@@ -64,46 +64,44 @@
     mode = "0644";
   };
 
-  environment.etc."ssh/sshd_config_127_6" = {
+  environment.etc."ssh/sshd_config_127_8" = {
     text = ''
       Port 22
-      ListenAddress 127.0.0.6
-      HostKey /etc/ssh/ssh_host_rsa_127_6
-      PidFile /run/sshd_127_6.pid
+      ListenAddress 127.0.0.8
+      HostKey /etc/ssh/ssh_host_rsa_127_8
+      PidFile /run/sshd_127_8.pid
       PermitRootLogin no
       PasswordAuthentication yes
     '';
     mode = "0644";
   };
 
-  systemd.services.ssh-extra-key-127-5 = {
-    description = "Generate SSH host key for 127.0.0.5";
+  systemd.services.ssh-extra-key-127-7 = {
+    description = "Generate SSH host key for 127.0.0.7";
     wantedBy = [ "multi-user.target" ];
-    before = [ "getty@tty1.service" ];
   
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = pkgs.writeShellScript "ssh-extra-key-127-5" ''
-        keyfile="/etc/ssh/ssh_host_rsa_127_5"
+      ExecStart = pkgs.writeShellScript "ssh-extra-key-127-7" ''
+        keyfile="/etc/ssh/ssh_host_rsa_127_7"
         if [ ! -f "$keyfile" ]; then
-          echo "Generating host key for 127.0.0.5..."
+          echo "Generating host key for 127.0.0.7..."
           ${pkgs.openssh}/bin/ssh-keygen -t rsa -f "$keyfile" -N "" >/dev/null
         fi
       '';
     };
   };
 
-  systemd.services.ssh-extra-key-127-6 = {
-    description = "Generate SSH host key for 127.0.0.6";
+  systemd.services.ssh-extra-key-127-8 = {
+    description = "Generate SSH host key for 127.0.0.8";
     wantedBy = [ "multi-user.target" ];
-    before = [ "getty@tty1.service" ];
   
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = pkgs.writeShellScript "ssh-extra-key-127-6" ''
-        keyfile="/etc/ssh/ssh_host_rsa_127_6"
+      ExecStart = pkgs.writeShellScript "ssh-extra-key-127-8" ''
+        keyfile="/etc/ssh/ssh_host_rsa_127_8"
         if [ ! -f "$keyfile" ]; then
-          echo "Generating host key for 127.0.0.6..."
+          echo "Generating host key for 127.0.0.8..."
           ${pkgs.openssh}/bin/ssh-keygen -t rsa -f "$keyfile" -N "" >/dev/null
         fi
       '';
@@ -118,22 +116,24 @@
   networking.networkmanager.enable = true;
   networking.firewall.allowedTCPPorts = [ 3000 5000 ];
 
-  systemd.services.sshd1275 = {
+  systemd.services.sshd1277 = {
     enable = true;
-    description = "OpenSSH Server on 127.0.0.5";
+    description = "OpenSSH Server on 127.0.0.7";
+    wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.openssh}/bin/sshd -D -f /etc/ssh/sshd_config_127_5";
+      ExecStart = "${pkgs.openssh}/bin/sshd -D -f /etc/ssh/sshd_config_127_7";
       Restart = "always";
     };
   };
   
-  systemd.services.sshd1276 = {
+  systemd.services.sshd1278 = {
     enable = true;
-    description = "OpenSSH Server on 127.0.0.6";
+    description = "OpenSSH Server on 127.0.0.8";
+    wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.openssh}/bin/sshd -D -f /etc/ssh/sshd_config_127_6";
+      ExecStart = "${pkgs.openssh}/bin/sshd -D -f /etc/ssh/sshd_config_127_8";
       Restart = "always";
     };
   };

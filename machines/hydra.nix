@@ -140,8 +140,10 @@
 
   virtualisation.docker.enable = true;
 
+  users.groups.sshd = {};
+
   users.users.sshd = {
-    groups = ["users"];
+    group = "sshd";
     description = "SSH daemon user";
     isSystemUser = true;
     createHome = false;

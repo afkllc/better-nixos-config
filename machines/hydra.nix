@@ -80,14 +80,10 @@
     mode = "0644";
   };
 
-  security.pam.services.sshd.allowNullPassword = false;
-  security.pam.services.sshd.text = lib.mkForce ''
-    auth       required pam_unix.so
-    account    required pam_unix.so
-    password   required pam_unix.so
-    session    required pam_unix.so
-  '';
-
+  services.openssh = {
+    enable = true;
+    ports = [ 22 ];
+  };
 
   systemd.services.ssh-extra-key-127-7 = {
     description = "Generate SSH host key for 127.0.0.7";
@@ -152,16 +148,6 @@
   };
 
   virtualisation.docker.enable = true;
-
-  users.groups.sshd = {};
-
-  users.users.sshd = {
-    group = "sshd";
-    description = "SSH daemon user";
-    isSystemUser = true;
-    createHome = false;
-    shell = pkgs.bash;
-  };
 
   system.autoUpgrade.flake = lib.mkForce "git+https://github.com/iLikeToCode/nixos-config#hydra";
 

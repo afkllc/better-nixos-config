@@ -12,6 +12,16 @@
   outputs =
     { self, nixpkgs, home-manager, flake-utils, webots, ... }@attrs:
     {
+      let
+        eachSystem = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ];
+
+        nixosConfigsForSystem = system:
+          nixpkgs.lib.mapAttrs
+            (_: cfg: cfg.config.system.build.toplevel)
+            (nixpkgs.lib.filterAttrs
+              (_: cfg: cfg.pkgs.stdenv.hostPlatform.system == system)
+              self.nixosConfigurations);
+      in
       nixosConfigurations = {
         ah-w = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -136,6 +146,22 @@
             meta.description = "Webots in an FHS environment";
           };
         };
+      };
+
+      hydraJobs = {
+        packages = self.packages;
+        configs = eachSystem (system:
+          nixosConfigsForSystem system
+        );
+        images = eachSystem (system:
+          let
+            pkgs = nixpkgs.legacyPackages.${system};
+            lib = pkgs.lib;
+          in
+          lib.optionalAttrs (system == "x86_64-linux") {
+            iso = self.nixosConfigurations.iso.config.system.build.isoImage;
+          }
+        );
       };
     };
 }

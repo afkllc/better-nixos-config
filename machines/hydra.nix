@@ -38,7 +38,7 @@
         protocol = null;
         systems = [ "x86_64-linux" "aarch64-linux" ];
         supportedFeatures = [ "kvm" "nixos-test" "big-parallel" "benchmark" ];
-        maxJobs = 1;
+        maxJobs = 2;
       }
     ];
     settings = {

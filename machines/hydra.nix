@@ -80,6 +80,15 @@
     mode = "0644";
   };
 
+  security.pam.services.sshd.allowNullPassword = false;
+  security.pam.services.sshd.text = lib.mkForce ''
+    auth       required pam_unix.so
+    account    required pam_unix.so
+    password   required pam_unix.so
+    session    required pam_unix.so
+  '';
+
+
   systemd.services.ssh-extra-key-127-7 = {
     description = "Generate SSH host key for 127.0.0.7";
     wantedBy = [ "multi-user.target" ];

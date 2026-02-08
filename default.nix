@@ -1,4 +1,4 @@
-{ pkgs, lib, flat ? false, ... }:
+{ pkgs, lib, flat ? false, attrs, ... }:
 
 let
   readPackages = dir: prefix:
@@ -10,7 +10,7 @@ let
         (name: _: {
             name = let base = lib.removeSuffix ".nix" name; in
                    if flat && prefix != "" then prefix + "-" + base else base;
-            value = pkgs.callPackage (./${dir}/${name}) { inherit pkgs; };
+            value = pkgs.callPackage (./${dir}/${name}) { inherit pkgs lib attrs; };
         })
         (lib.filterAttrs (name: _: lib.hasSuffix ".nix" name && !lib.hasPrefix "default" name) entries);
 

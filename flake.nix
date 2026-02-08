@@ -11,17 +11,17 @@
   };
   outputs =
     { self, nixpkgs, home-manager, flake-utils, webots, ... }@attrs:
-    {
-      let
-        eachSystem = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ];
+    let
+      eachSystem = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ];
 
-        nixosConfigsForSystem = system:
-          nixpkgs.lib.mapAttrs
-            (_: cfg: cfg.config.system.build.toplevel)
-            (nixpkgs.lib.filterAttrs
-              (_: cfg: cfg.pkgs.stdenv.hostPlatform.system == system)
-              self.nixosConfigurations);
-      in
+      nixosConfigsForSystem = system:
+        nixpkgs.lib.mapAttrs
+          (_: cfg: cfg.config.system.build.toplevel)
+          (nixpkgs.lib.filterAttrs
+            (_: cfg: cfg.pkgs.stdenv.hostPlatform.system == system)
+            self.nixosConfigurations);
+    in
+    {
       nixosConfigurations = {
         ah-w = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -99,54 +99,27 @@
         };
       };
       
-      packages = {
-        "x86_64-linux" = let
-          pkgs = import nixpkgs { system = "x86_64-linux"; };
-          webotsSrc = webots;
-
-          dependencies = with pkgs; [
-            brotli sndio boost cmake curl dbus expat ffmpeg fox freetype
-            gdal gl2ps glew glib gnumake gnupg jdk krb5 libGL libGLU
-            libgcrypt libssh2 libuuid libxkbcommon libxml2 libzip
-            lsb-release nss_latest pbzip2 pkg-config prelink proj
-            python311 readline swig unzip wget xercesc
-            xorg.libX11 xorg.libXcomposite xorg.libXtst
-            xorg.libxcb xorg.xcbutil xvfb-run zip zlib
-          ];
-
-          desktopFile = pkgs.makeDesktopItem {
-            name = "webots-fhs";
-            exec = "%%EXEC%%";
-            icon = "${webotsSrc}/resources/icons/core/webots.png";
-            comment = "Webots in an FHS environment";
-            desktopName = "Webots (FHS)";
-            genericName = "Webots (FHS)";
-            categories = [ "Utility" ];
+      legacyPackages = eachSystem (system:
+        import ./. {
+          pkgs = import nixpkgs {
+            inherit system;
           };
-        in rec {
-          # The actual Webots package
-          webots = pkgs.buildFHSEnv {
-            name = "webots";
-            targetPkgs = pkgs: dependencies;
+          lib = nixpkgs.lib;
+          flat = false;
+          inherit attrs;
+        }
+      );
 
-            runScript = pkgs.writeShellScript "webots" ''
-              export QT_PLUGIN_PATH=${webotsSrc}/lib/webots/qt/plugins
-              export WEBOTS_HOME=${webotsSrc}
-              exec ${webotsSrc}/webots "$@"
-            '';
-
-            extraInstallCommands = ''
-              mkdir -p $out
-              cp -r ${desktopFile}/* $out/
-              chmod +w $out/share/applications
-              sed -i "s#%%EXEC%%#$out/bin/webots#" \
-                $out/share/applications/webots-fhs.desktop
-            '';
-
-            meta.description = "Webots in an FHS environment";
+      packages = eachSystem (system:
+        import ./. {
+          pkgs = import nixpkgs {
+            inherit system;
           };
-        };
-      };
+          lib = nixpkgs.lib;
+          flat = true;
+          inherit attrs;
+        }
+      );
 
       hydraJobs = {
         packages = self.packages;

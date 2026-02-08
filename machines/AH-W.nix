@@ -8,7 +8,7 @@
   system.autoUpgrade.flake = lib.mkForce "git+https://github.com/iLikeToCode/nixos-config#ah-w";
 
 
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
     self.packages.x86_64-linux.webots
     openscad
   ];

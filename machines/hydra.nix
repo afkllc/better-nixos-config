@@ -8,6 +8,8 @@
     notificationSender = "hydra@localhost";
     useSubstitutes = true;
   };
+  
+  services.qemuGuest.enable = true;
 
   services.nix-serve = {
     enable = true;

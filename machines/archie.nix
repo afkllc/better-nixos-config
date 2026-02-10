@@ -97,8 +97,6 @@
     libreoffice
     blender
     element-desktop
-    rustup
-    gcc
     vlc
     wine64Packages.full
     cifs-utils

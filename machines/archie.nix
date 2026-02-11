@@ -100,6 +100,7 @@
     vlc
     wine64Packages.full
     cifs-utils
+    rustup
   ];
 
   system.stateVersion = "25.11";

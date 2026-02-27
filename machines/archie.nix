@@ -21,6 +21,12 @@
     ../programs/cachix.nix
   ];
 
+
+  swapDevices = [{
+    device = "/swapfile";
+    size = 16 * 1024;
+  }];
+
   services.avahi = {
     enable = true;
     nssmdns4 = true;

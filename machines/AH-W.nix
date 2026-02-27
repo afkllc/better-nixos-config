@@ -5,6 +5,11 @@
     ../programs/discord.nix
   ];
 
+  swapDevices = [{
+    device = "/swapfile";
+    size = 16 * 1024;
+  }];
+
   system.autoUpgrade.flake = lib.mkForce "git+https://github.com/iLikeToCode/nixos-config#ah-w";
 
   systemd.targets.sleep.enable = false;

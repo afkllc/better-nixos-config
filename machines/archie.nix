@@ -21,6 +21,7 @@
     ../programs/cachix.nix
   ];
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   swapDevices = [{
     device = "/swapfile";

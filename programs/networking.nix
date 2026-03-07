@@ -7,12 +7,8 @@
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
   networking.firewall.checkReversePath = "loose";
 
-  networking.bridges.br0 = {
-    interfaces = [];
-  };
-
   systemd.services.dynamic-bridge = {
-    description = "Enslave all Ethernet devices to br0";
+    description = "Create br0 bridge and enslave all Ethernet devices";
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
     path = with pkgs; [ networkmanager ];
@@ -21,6 +17,11 @@
       ExecStart = "${pkgs.writeShellScript "dynamic-bridge.sh" ''
         #!/bin/sh
         set -e
+
+        # Create bridge br0 if it doesn't exist
+        if ! nmcli connection show br0 >/dev/null 2>&1; then
+          nmcli connection add type bridge con-name br0 ifname br0 ipv4.method auto ipv6.method auto
+        fi
 
         # Loop over all physical Ethernet devices and enslave them to br0
         for dev in $(nmcli -t -f DEVICE,TYPE device | grep ethernet | cut -d: -f1); do

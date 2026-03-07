@@ -15,6 +15,7 @@
     description = "Enslave all Ethernet devices to br0";
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
+    path = with pkgs; [ networkmanager ];
     serviceConfig = {
       Type = "oneshot";
       ExecStart = "${pkgs.writeShellScript "dynamic-bridge.sh" ''

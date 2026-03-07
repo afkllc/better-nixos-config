@@ -2,7 +2,7 @@
 
 {
     environment.systemPackages = with pkgs; [
-        qemu_full
+        qemu
     ];
     programs.virt-manager.enable = true;
 

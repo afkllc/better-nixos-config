@@ -12,7 +12,7 @@
     virtualisation = {
         libvirtd = {
             enable = true;
-            allowedBridges = [ "docker0" ];
+            allowedBridges = [ "docker0" "br0" ];
             qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
         };
         spiceUSBRedirection.enable = true;

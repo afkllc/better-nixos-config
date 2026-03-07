@@ -15,21 +15,28 @@
     serviceConfig = {
       Type = "oneshot";
       ExecStart = "${pkgs.writeShellScript "dynamic-bridge.sh" ''
-        #!/bin/sh
-        set -e
+      #!/bin/sh
+      set -e
 
-        # Create bridge br0 if it doesn't exist
-        if ! nmcli connection show br0 >/dev/null 2>&1; then
-          nmcli connection add type bridge con-name br0 ifname br0 ipv4.method auto ipv6.method auto
-        fi
+      BRIDGE=br0
 
-        # Loop over all physical Ethernet devices and enslave them to br0
-        for dev in $(nmcli -t -f DEVICE,TYPE device | grep ethernet | cut -d: -f1); do
-          nmcli connection add type bridge-slave ifname "$dev" master br0 || true
-        done
+      # Create bridge if it doesn't exist
+      if ! nmcli connection show "$BRIDGE" >/dev/null 2>&1; then
+        nmcli connection add type bridge con-name "$BRIDGE" ifname "$BRIDGE" ipv4.method auto ipv6.method auto
+      fi
 
-        # Bring the bridge up
-        nmcli connection up br0
+      # Loop over all physical Ethernet devices
+      for dev in $(nmcli -t -f DEVICE,TYPE device | grep ethernet | cut -d: -f1); do
+        # Bring the interface down before enslaving
+        nmcli device set "$dev" managed yes
+        nmcli device disconnect "$dev" || true
+
+        # Add as a bridge slave (ignore if already exists)
+        nmcli connection add type bridge-slave ifname "$dev" master "$BRIDGE" || true
+      done
+
+      # Bring the bridge up
+      nmcli connection up "$BRIDGE"
       ''}";
       RemainAfterExit = true;
     };

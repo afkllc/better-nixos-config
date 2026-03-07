@@ -1,19 +1,5 @@
 { pkgs, ... }:
 
-let
-  dynamicBridgeScript = pkgs.writeBinScript "dynamic-bridge" ''
-    #!/bin/sh
-    set -e
-
-    # Loop over all physical Ethernet devices and enslave them to br0
-    for dev in $(nmcli -t -f DEVICE,TYPE device | grep ethernet | cut -d: -f1); do
-      nmcli connection add type bridge-slave ifname "$dev" master br0 || true
-    done
-
-    # Bring the bridge up
-    nmcli connection up br0
-  '';
-in
 {
   networking.networkmanager.enable = true;
   services.tailscale.enable = true;
@@ -31,7 +17,18 @@ in
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${dynamicBridgeScript}";
+      ExecStart = "${pkgs.writeShellScript "dynamic-bridge.sh" ''
+        #!/bin/sh
+        set -e
+
+        # Loop over all physical Ethernet devices and enslave them to br0
+        for dev in $(nmcli -t -f DEVICE,TYPE device | grep ethernet | cut -d: -f1); do
+          nmcli connection add type bridge-slave ifname "$dev" master br0 || true
+        done
+
+        # Bring the bridge up
+        nmcli connection up br0
+      ''}";
       RemainAfterExit = true;
     };
   };

@@ -21,7 +21,9 @@ in
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
   networking.firewall.checkReversePath = "loose";
 
-  networking.bridges.br0 = {};
+  networking.bridges.br0 = {
+    interfaces = [];
+  };
 
   systemd.services.dynamic-bridge = {
     description = "Enslave all Ethernet devices to br0";

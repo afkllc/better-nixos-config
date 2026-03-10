@@ -5,6 +5,7 @@
     ((pkgs.callPackage ./vscode-with-extensions.nix {}).override {
       vscode = pkgs.vscode;
       vscodeExtensions = with pkgs.vscode-extensions; [
+        golang.go
         bbenoist.nix
         bradlc.vscode-tailwindcss
         editorconfig.editorconfig

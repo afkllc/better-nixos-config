@@ -18,7 +18,7 @@
     ../programs/networking.nix
     ../programs/desktop.nix
     ../programs/flatpak.nix
-    ../programs/cachix.nix
+    #../programs/cachix.nix
   ];
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];

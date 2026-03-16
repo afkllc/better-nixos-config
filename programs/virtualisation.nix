@@ -11,10 +11,6 @@
     networking.bridges = {
         vmbr0.interfaces = [ ];
         vmbr1.interfaces = [ ];
-        vmbr2.interfaces = [ ];
-        vmbr3.interfaces = [ ];
-        vmbr4.interfaces = [ ];
-        vmbr5.interfaces = [ ];
     };
 
     networking.interfaces.vmbr0 = {

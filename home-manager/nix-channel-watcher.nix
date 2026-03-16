@@ -7,10 +7,10 @@ let
     LOCKFILE=/etc/nixos/flake.lock
 
     # locked nixpkgs revision
-    LOCKED_REV=$(jq -r '.nodes.nixpkgs.locked.rev' "$LOCKFILE")
+    LOCKED_REV=$(${pkgs.jq}/bin/jq -r '.nodes.nixpkgs.locked.rev' "$LOCKFILE")
 
     # upstream nixpkgs revision
-    UPSTREAM_REV=$(nix flake metadata nixpkgs --json | jq -r '.revision')
+    UPSTREAM_REV=$(nix flake metadata nixpkgs --json | ${pkgs.jq}/bin/jq -r '.revision')
 
     if [ "$LOCKED_REV" != "$UPSTREAM_REV" ]; then
       ${pkgs.libnotify}/bin/notify-send \
@@ -25,9 +25,6 @@ in
 {
   systemd.user.services.flake-nixpkgs-watcher = {
     Unit.Description = "Check flake nixpkgs input for updates";
-    path = {
-      jq = pkgs.jq;
-    };
     Service = {
       Type = "oneshot";
       ExecStart = checkScript;

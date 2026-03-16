@@ -5,6 +5,9 @@
     ../programs/discord.nix
   ];
 
+  networking.nat.enable = true;
+  networking.nat.externalInterface = "enp5s0";
+
   system.autoUpgrade.flake = lib.mkForce "git+https://github.com/iLikeToCode/nixos-config#ah-w";
 
   services.xrdp.enable = true;

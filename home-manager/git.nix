@@ -7,6 +7,9 @@
       user.name  = "iLikeToCode";
       user.email = "archie@archiesbytes.xyz";
       push.autoSetupRemote = true;
+      gitCredentialHelper = {
+        enable = true;
+      };
     };
   };
 }

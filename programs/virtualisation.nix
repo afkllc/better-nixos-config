@@ -7,12 +7,45 @@
     programs.virt-manager.enable = true;
 
     networking.nftables.enable = true;
-    networking.firewall.trustedInterfaces = [ "docker0" ];
+
+    networking.bridges = {
+        vmbr0.interfaces = [ ];
+        vmbr1.interfaces = [ ];
+        vmbr2.interfaces = [ ];
+    };
+
+    networking.interfaces.vmbr0 = {
+        ipv4.addresses = [{ address = "192.168.10.1"; prefixLength = 24; }];
+    };
+
+    networking.interfaces.vmbr1 = {
+        ipv4.addresses = [{ address = "192.168.20.1"; prefixLength = 24; }];
+    };
+
+    networking.interfaces.vmbr2 = {
+        ipv4.addresses = [{ address = "192.168.30.1"; prefixLength = 24; }];
+    };
+
+    services.dnsmasq = {
+        enable = true;
+
+        settings = {
+            interface = [ "vmbr0" "vmbr1" "vmbr2" ];
+
+            dhcp-range = [
+                "vmbr0,192.168.10.10,192.168.10.200,12h"
+                "vmbr1,192.168.20.10,192.168.20.200,12h"
+                "vmbr2,192.168.30.10,192.168.30.150,12h"
+            ];
+        };
+    };
+
+    networking.nat.internalInterfaces = [ "vmbr0" ];
 
     virtualisation = {
         libvirtd = {
             enable = true;
-            allowedBridges = [ "docker0" "br0" ];
+            allowedBridges = [ "vmbr0" "vmbr1" "vmbr2" ];
             qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
         };
         spiceUSBRedirection.enable = true;

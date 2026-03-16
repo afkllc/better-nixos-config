@@ -18,7 +18,6 @@ let
     if [ "$UPSTREAM_REV" != "null" ] && [ "$LOCKED_REV" != "$UPSTREAM_REV" ]; then
       ${pkgs.libnotify}/bin/notify-send \
         --expire-time=0 \
-        --icon=/usr/share/pixmaps/nixos-logo-only-hires.png \
         --app-name="Nix Flake Watcher" \
         "nixpkgs update available" \
         "locked: $LOCKED_REV → upstream: $UPSTREAM_REV"

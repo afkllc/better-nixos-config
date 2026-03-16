@@ -25,7 +25,9 @@ in
 {
   systemd.user.services.flake-nixpkgs-watcher = {
     Unit.Description = "Check flake nixpkgs input for updates";
-    path = with pkgs; [ jq ];
+    path = {
+      jq = pkgs.jq
+    };
     Service = {
       Type = "oneshot";
       ExecStart = checkScript;

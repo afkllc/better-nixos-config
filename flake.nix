@@ -20,26 +20,11 @@
           (nixpkgs.lib.filterAttrs
             (_: cfg: cfg.pkgs.stdenv.hostPlatform.system == system)
             self.nixosConfigurations);
-
-      nixpkgsFor = system: let
-          pkgs = import nixpkgs { inherit system; };
-
-          patchFiles =
-            map (name: ./patches + "/${name}")
-              (builtins.attrNames
-                (pkgs.lib.filterAttrs (_: v: v == "regular")
-                  (builtins.readDir ./patches)));
-
-          patchedPkgs = pkgs.applyPatches {
-            name = "nixpkgs-patched-${nixpkgs.shortRev}";
-            src = nixpkgs;
-            patches = patchFiles;
-          };
-        in import patchedPkgs { inherit system; };
+      };
     in
     {
       nixosConfigurations = {
-        ah-w = nixpkgs.lib.nixosSystem rec {
+        ah-w = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = attrs;
           modules = [

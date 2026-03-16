@@ -40,6 +40,8 @@
         };
     };
 
+    networking.firewall.trustedInterfaces = [ "vmbr0" ];
+
     networking.nat.internalInterfaces = [ "vmbr0" ];
 
     virtualisation = {

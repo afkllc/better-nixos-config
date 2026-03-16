@@ -18,20 +18,12 @@
     };
 
     networking.interfaces.vmbr0 = {
-        ipv4.addresses = [{ address = "192.168.10.1"; prefixLength = 24; }];
+        ipv4.addresses = [{ address = "192.168.50.5"; prefixLength = 24; }];
     };
 
     networking.interfaces.vmbr1 = {
-        ipv4.addresses = [{ address = "192.168.20.1"; prefixLength = 24; }];
+        ipv4.addresses = [{ address = "192.168.20.5"; prefixLength = 24; }];
     };
-
-    networking.interfaces.vmbr2 = {
-        ipv4.addresses = [{ address = "192.168.30.1"; prefixLength = 24; }];
-    };
-
-    networking.interfaces.vmbr3.ipv4.addresses = [{ address = "192.168.40.2"; prefixLength = 24; }];
-    networking.interfaces.vmbr4.ipv4.addresses = [{ address = "192.168.50.2"; prefixLength = 24; }];
-    networking.interfaces.vmbr5.ipv4.addresses = [{ address = "192.168.60.2"; prefixLength = 24; }];
 
     services.dnsmasq = {
         enable = true;
@@ -54,7 +46,7 @@
     virtualisation = {
         libvirtd = {
             enable = true;
-            allowedBridges = [ "vmbr0" "vmbr1" "vmbr2" "vmbr3" "vmbr4" "vmbr5" ];
+            allowedBridges = [ "vmbr0" "vmbr1" ];
             qemu.vhostUserPackages = with pkgs; [ virtiofsd ];
         };
         spiceUSBRedirection.enable = true;

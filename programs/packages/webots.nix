@@ -13,8 +13,8 @@ let
         libgcrypt libssh2 libuuid libxkbcommon libxml2 libzip
         lsb-release nss_latest pbzip2 pkg-config prelink proj
         python311 readline swig unzip wget xercesc
-        xorg.libX11 xorg.libXcomposite xorg.libXtst
-        xorg.libxcb xorg.xcbutil xvfb-run zip zlib
+        libx11 libxcomposite libxtst
+        libxcb libxcb-util xvfb-run zip zlib
     ];
 
     desktopFile = pkgs.makeDesktopItem {

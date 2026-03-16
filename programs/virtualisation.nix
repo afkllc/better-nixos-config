@@ -29,11 +29,9 @@
         ipv4.addresses = [{ address = "192.168.30.1"; prefixLength = 24; }];
     };
 
-    networking.interfaces.vmbr3 = {};
-
-    networking.interfaces.vmbr4 = {};
-
-    networking.interfaces.vmbr5 = {};
+    networking.interfaces.vmbr3.ipv4.addresses = [{ address = "192.168.40.2"; prefixLength = 24; }];
+    networking.interfaces.vmbr4.ipv4.addresses = [{ address = "192.168.50.2"; prefixLength = 24; }];
+    networking.interfaces.vmbr5.ipv4.addresses = [{ address = "192.168.60.2"; prefixLength = 24; }];
 
     services.dnsmasq = {
         enable = true;

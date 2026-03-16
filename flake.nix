@@ -20,7 +20,6 @@
           (nixpkgs.lib.filterAttrs
             (_: cfg: cfg.pkgs.stdenv.hostPlatform.system == system)
             self.nixosConfigurations);
-      };
     in
     {
       nixosConfigurations = {

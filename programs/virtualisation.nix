@@ -44,6 +44,8 @@
 
     networking.nat.internalInterfaces = [ "vmbr0" ];
 
+    users.users.extraGroups = [ "docker" "libvirt" ];
+
     virtualisation = {
         libvirtd = {
             enable = true;

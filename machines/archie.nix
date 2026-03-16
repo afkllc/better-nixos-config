@@ -78,7 +78,7 @@
   users.users.archie = {
     description = "Archie Hurst";
     isNormalUser = true;
-    extraGroups = [ "dialout" "networkmanager" "wheel" "docker" "libvirt" ];
+    extraGroups = [ "dialout" "networkmanager" "wheel" ];
   };
 
   hardware.bluetooth.enable = true;
@@ -99,7 +99,7 @@
   environment.systemPackages = with pkgs; [
     vim
     wget
-    bitwarden-desktop
+    #bitwarden-desktop
     protonvpn-gui
     freeplane
     libreoffice

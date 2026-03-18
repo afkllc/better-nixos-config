@@ -99,7 +99,7 @@
   environment.systemPackages = with pkgs; [
     vim
     wget
-    #bitwarden-desktop
+    bitwarden-desktop
     protonvpn-gui
     freeplane
     libreoffice

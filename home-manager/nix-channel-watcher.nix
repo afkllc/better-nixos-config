@@ -17,7 +17,7 @@ let
 
     if [ "$UPSTREAM_REV" != "null" ] && [ "$LOCKED_REV" != "$UPSTREAM_REV" ]; then
       ${pkgs.libnotify}/bin/notify-send \
-        --expire-time=0 \
+        --expire-time=15 \
         --app-name="Nix Flake Watcher" \
         "nixpkgs update available" \
         "locked: $LOCKED_REV → upstream: $UPSTREAM_REV"

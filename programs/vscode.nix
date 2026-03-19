@@ -13,6 +13,7 @@
         astro-build.astro-vscode
 
         rust-lang.rust-analyzer
+        dustypomerleau.rust-syntax
         
         # ── Python ───────────────────────────────────
         ms-python.python

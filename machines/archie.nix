@@ -109,6 +109,7 @@
     wine64Packages.full
     cifs-utils
     rustup
+    rust-analyzer
   ];
 
   system.stateVersion = "26.05";

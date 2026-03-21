@@ -110,6 +110,7 @@
     cifs-utils
     rustup
     rust-analyzer
+    mongodb-compass
   ];
 
   system.stateVersion = "26.05";

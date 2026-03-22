@@ -23,7 +23,7 @@ in
         };
         cpu = {
           interval = 1;
-          command = ''echo "CPU: $(top -bn1 | grep "Cpu(s)" | awk '{print $2 + $4 "%"}")"'';
+          command = ''echo "CPU: $(top -bn1 | grep 'Cpu(s)' | awk '{print $2 + $4 '%'}')"'';
         };
         memory = {
           interval = 1;

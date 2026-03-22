@@ -23,7 +23,7 @@ in
         };
         cpu = {
           interval = 1;
-          command = ''echo "CPU: $(top -bn1 | grep 'Cpu(s)' | awk '{print $2 + $4 '%'}')"'';
+          command = ''echo "CPU: $(top -bn1 | grep 'Cpu(s)' | awk '{printf "%.1f%%\n", $2 + $4}')"'';
         };
         memory = {
           interval = 1;
@@ -94,6 +94,6 @@ in
         }
       ];
     };
-    extraConfig = "\n        set $ws1 'Browser'\n\n        set $ws2 '2'\n\n        set $ws3 '3'\n\n        set $ws4 '4'\n\n        set $ws5 '5'\n\n        exec --no-startup-id nm-applet\n\n        ";
+    extraConfig = "\nexec --no-startup-id nm-applet\nexec --no-startup-id gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg\n";
   };
 }

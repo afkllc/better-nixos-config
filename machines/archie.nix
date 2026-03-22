@@ -111,6 +111,9 @@
     rustup
     rust-analyzer
     mongodb-compass
+    slack
+    slack-term
+    trayscale
   ];
 
   system.stateVersion = "26.05";

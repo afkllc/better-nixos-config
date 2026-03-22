@@ -5,6 +5,15 @@
   ...
 }:
 {
+  environment.systemPackages = with pkgs; [
+    kwalletmanager
+    kdeApplications.kwallet
+    libsecret
+  ];
+
+  security.pam.services.login.enable = true;
+  security.pam.services.sudo.enable = true;
+
   services.xserver = {
     enable = true;
 
@@ -30,6 +39,9 @@
         i3blocks # if you are planning on using i3blocks over i3status
         rofi
       ];
+      extraSessionCommands = ''
+        /run/current-system/sw/bin/kwalletd5 &
+      '';
     };
   };
   services.displayManager.ly.enable = true;

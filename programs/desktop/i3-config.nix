@@ -13,10 +13,6 @@ in
     enable = true;
     bars = {
       top = {
-        volume = {
-          interval = 1;
-          command = ''echo "Volume: $(pactl list sinks | grep Volume | head -n1 | awk '{print $5}')"'';
-        };
         battery = {
           interval = 1;
           command = ''echo "Battery: $(acpi -b | grep -P -o '[0-9]+(?=%)')%"'';
@@ -25,9 +21,17 @@ in
           interval = 1;
           command = ''echo "Disk: $(df -h / | grep / | awk '{print $5}')"'';
         };
+        cpu = {
+          interval = 1;
+          command = ''echo "CPU: $(top -bn1 | grep "Cpu(s)" | awk '{print $2 + $4 "%"}")"'';
+        };
         memory = {
           interval = 1;
           command = ''echo "Memory: $(free -h | grep Mem | awk '{print $3}')"'';
+        };
+        volume = {
+          interval = 1;
+          command = ''echo "Volume: $(pactl list sinks | grep Volume | head -n1 | awk '{print $5}')"'';
         };
         user = {
           interval = "persistent";
@@ -52,7 +56,7 @@ in
         # Basic Keybinds
         "${mod}+d" = "exec --no-startup-id dmenu_run";
         "${mod}+Shift+x" = "exec sh -c 'i3lock -c 222222 & sleep 5 && xset dpms force off'";
-        "${mod}+Return" = "exec i3-sensible-terminal";
+        "${mod}+Return" = "exec kitty";
         # Focus
         "${mod}+j" = "focus left";
         "${mod}+k" = "focus down";
@@ -90,6 +94,6 @@ in
         }
       ];
     };
-    extraConfig = "\n        set $ws1 'Browser'\n\n        set $ws2 'Terminal'\n\n        set $ws3 'Chat'\n\n        set $ws4 '4'\n\n        set $ws5 '5'\n\n        exec --no-startup-id nm-applet\n\n        ";
+    extraConfig = "\n        set $ws1 'Browser'\n\n        set $ws2 '2'\n\n        set $ws3 '3'\n\n        set $ws4 '4'\n\n        set $ws5 '5'\n\n        exec --no-startup-id nm-applet\n\n        ";
   };
 }

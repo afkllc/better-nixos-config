@@ -7,6 +7,8 @@
 {
   environment.systemPackages = with pkgs; [
     acpi
+    pulseaudio
+    kitty
   ];
 
   services.pipewire = {

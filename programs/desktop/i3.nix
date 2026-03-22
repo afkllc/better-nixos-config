@@ -6,21 +6,20 @@
 }:
 {
   services.xserver = {
+    enable = true;
+
     xkb = {
       layout = "gb";
       variant = "";
     };
-  };
-  services.xserver = {
-    enable = true;
 
     desktopManager = {
       xterm.enable = false;
-      xfce = {
-        enable = true;
-        noDesktop = true;
-        enableXfwm = false;
-      };
+      #xfce = {
+      #  enable = true;
+      #  noDesktop = true;
+      #  enableXfwm = false;
+      #};
     };
 
     windowManager.i3 = {
@@ -33,5 +32,6 @@
       ];
     };
   };
+  services.displayManager.ly.enable = true;
   services.displayManager.defaultSession = "none+i3";
 }

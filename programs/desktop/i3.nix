@@ -9,6 +9,7 @@
     acpi
     pulseaudio
     kitty
+    feh
   ];
 
   services.pipewire = {

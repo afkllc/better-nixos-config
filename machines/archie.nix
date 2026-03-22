@@ -8,16 +8,15 @@
 {
   imports = [
     ../hardware/generic.nix
-    ../programs/firefox.nix
-    ../programs/vscode.nix
-    ../programs/python.nix
+    ../programs/apps/firefox.nix
+    ../programs/apps/vscode.nix
+    ../programs/apps/python.nix
     ../programs/git.nix
     ../programs/zsh.nix
     ../programs/virtualisation.nix
-    ../programs/node.nix
+    ../programs/apps/node.nix
     ../programs/networking.nix
-    ../programs/desktop.nix
-    ../programs/flatpak.nix
+    ../programs/apps/flatpak.nix
     #../programs/cachix.nix
   ];
 

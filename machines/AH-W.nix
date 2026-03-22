@@ -2,7 +2,8 @@
 {
   imports = [
     ./archie.nix
-    ../programs/discord.nix
+    ../programs/apps/discord.nix
+    ../programs/desktop/kde.nix
   ];
 
   networking.nat.enable = true;

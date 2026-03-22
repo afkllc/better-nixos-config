@@ -2,7 +2,8 @@
 {
   imports = [
     ./archie.nix
-    ../programs/discord.nix
+    ../programs/apps/discord.nix
+    ../programs/desktop/i3.nix
   ];
 
   hardware.enableRedistributableFirmware = true;

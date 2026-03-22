@@ -6,12 +6,17 @@
 }:
 {
   environment.systemPackages = with pkgs; [
-    kdeApplications.kwallet
-    libsecret
+    acpi
   ];
 
-  security.pam.services.login.enable = true;
-  security.pam.services.sudo.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;  # provides pactl compatibility
+  };
+
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
 
   services.xserver = {
     enable = true;
@@ -38,9 +43,6 @@
         i3blocks # if you are planning on using i3blocks over i3status
         rofi
       ];
-      extraSessionCommands = ''
-        /run/current-system/sw/bin/kwalletd5 &
-      '';
     };
   };
   services.displayManager.ly.enable = true;

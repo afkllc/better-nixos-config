@@ -17,10 +17,6 @@ in
           interval = 1;
           command = ''echo "Volume: $(pactl list sinks | grep Volume | head -n1 | awk '{print $5}')"'';
         };
-        brightness = {
-          interval = 1;
-          command = ''echo "Brightness: $(xbacklight -get | cut -d '.' -f 1)%"'';
-        };
         battery = {
           interval = 1;
           command = ''echo "Battery: $(acpi -b | grep -P -o '[0-9]+(?=%)')%"'';
@@ -55,7 +51,7 @@ in
       keybindings = lib.mkOptionDefault {
         # Basic Keybinds
         "${mod}+d" = "exec --no-startup-id dmenu_run";
-        "${mod}+Shift+x" = "exec sh -c 'i3lock -c 222222 & sleep 5 && xset dpms force of'";
+        "${mod}+Shift+x" = "exec sh -c 'i3lock -c 222222 & sleep 5 && xset dpms force off'";
         "${mod}+Return" = "exec i3-sensible-terminal";
         # Focus
         "${mod}+j" = "focus left";

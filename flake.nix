@@ -11,7 +11,7 @@
     webots.flake = false;
   };
   outputs =
-    { self, nixpkgs, home-manager, flake-utils, webots, ... }@attrs:
+    { self, nixpkgs, home-manager, flake-utils, nixos-hardware, webots, ... }@attrs:
     let
       eachSystem = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ];
 

@@ -5,6 +5,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     flake-utils.url = "github:numtide/flake-utils";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     webots.url = "https://github.com/cyberbotics/webots/releases/download/R2025a/webots-R2025a-x86-64.tar.bz2";
     webots.flake = false;
@@ -40,6 +41,7 @@
           system = "x86_64-linux";
           specialArgs = attrs;
           modules = [
+            nixos-hardware.nixosModules.dell-latitude-5490
             ./machines/AH-L.nix
             home-manager.nixosModules.home-manager
             {

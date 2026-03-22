@@ -6,7 +6,6 @@
 }:
 {
   environment.systemPackages = with pkgs; [
-    kwalletmanager
     kdeApplications.kwallet
     libsecret
   ];

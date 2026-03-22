@@ -17,7 +17,7 @@
         gpg.program = "${pkgs.gnupg}/bin/gpg";
         init.defaultBranch = "main";
         pull.rebase = false;
-        "crendential \"https://github.com\"" = {
+        "credential \"https://github.com\"" = {
             helper = "${pkgs.gh}/bin/gh auth git-credential";
         };
         "credential \"https://gist.github.com\"" = {

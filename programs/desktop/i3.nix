@@ -56,15 +56,5 @@
   };
   services.displayManager.defaultSession = "none+i3";
 
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "i3";
-        user = "archie";
-      };
-    };
-  };
-
-  security.pam.services.greetd.enableGnomeKeyring = true;
+  services.xserver.displayManager.lightdm.enable = true;
 }

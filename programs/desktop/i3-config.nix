@@ -55,7 +55,7 @@ in
       keybindings = lib.mkOptionDefault {
         # Basic Keybinds
         "${mod}+d" = "exec --no-startup-id dmenu_run";
-        "${mod}+Shift+x" = "${mod}+Shift+x" = "exec --no-startup-id i3lock-fancy-rapid 5 3";
+        "${mod}+Shift+x" = "exec --no-startup-id i3lock-fancy-rapid 5 3";
         "${mod}+Return" = "exec kitty";
         # Focus
         "${mod}+j" = "focus left";

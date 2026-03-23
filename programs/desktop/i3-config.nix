@@ -68,17 +68,17 @@ in
         "${mod}+Shift+l" = "move up";
         "${mod}+Shift+semicolon" = "move right";
         # Workspaces
-        "${mod}+1" = "workspace number $ws1";
-        "${mod}+2" = "workspace number $ws2";
-        "${mod}+3" = "workspace number $ws3";
-        "${mod}+4" = "workspace number $ws4";
-        "${mod}+5" = "workspace number $ws5";
+        "${mod}+w+1" = "workspace number $ws1";
+        "${mod}+w+2" = "workspace number $ws2";
+        "${mod}+w+3" = "workspace number $ws3";
+        "${mod}+w+4" = "workspace number $ws4";
+        "${mod}+w+5" = "workspace number $ws5";
 
-        "${mod}+Shift+1" = "move container to workspace number $ws1";
-        "${mod}+Shift+2" = "move container to workspace number $ws2";
-        "${mod}+Shift+3" = "move container to workspace number $ws3";
-        "${mod}+Shift+4" = "move container to workspace number $ws4";
-        "${mod}+Shift+5" = "move container to workspace number $ws5";
+        "${mod}+w+Shift+1" = "move container to workspace number $ws1";
+        "${mod}+w+Shift+2" = "move container to workspace number $ws2";
+        "${mod}+w+Shift+3" = "move container to workspace number $ws3";
+        "${mod}+w+Shift+4" = "move container to workspace number $ws4";
+        "${mod}+w+Shift+5" = "move container to workspace number $ws5";
         # Audio
         "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume 0 +5%";
         "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume 0 -5%";
@@ -94,6 +94,6 @@ in
         }
       ];
     };
-    extraConfig = "\nexec --no-startup-id nm-applet\nexec --no-startup-id gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg\n";
+    extraConfig = "\nexec --no-startup-id nm-applet";
   };
 }

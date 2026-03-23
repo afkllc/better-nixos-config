@@ -8,11 +8,14 @@
   environment.systemPackages = with pkgs; [
     acpi
     pulseaudio
-    kitty
     feh
-    xfce4-terminal
     gcr
+    autorandr
   ];
+
+  services.udev.extraRules = ''
+    ACTION=="change", SUBSYSTEM=="drm", RUN+="${pkgs.autorandr}/bin/autorandr --change"
+  '';
 
   services.pipewire = {
     enable = true;
@@ -46,6 +49,8 @@
         i3lock-fancy
         i3blocks
         rofi
+        xss-lock
+        xfce4-terminal
       ];
     };
   };

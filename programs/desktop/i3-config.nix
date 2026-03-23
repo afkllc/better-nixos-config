@@ -88,7 +88,11 @@ in
       ];
     };
     extraConfig = ''
+      exec --no-startup-id xset s 300 10
+      exec --no-startup-id xset dpms 300 300 300
+      exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy
       exec --no-startup-id gnome-keyring-daemon --start --components=ssh,secrets,pkcs11
+      exec_always --no-startup-id autorandr --change
       exec --no-startup-id nm-applet
     '';
   };

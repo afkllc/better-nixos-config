@@ -67,6 +67,9 @@ in
         "${mod}+Shift+k" = "move down";
         "${mod}+Shift+l" = "move up";
         "${mod}+Shift+semicolon" = "move right";
+
+        "${mod}+Tab" = "layout tabbed";
+
         # Workspaces
         "${mod}+w+1" = "workspace number $ws1";
         "${mod}+w+2" = "workspace number $ws2";
@@ -74,11 +77,11 @@ in
         "${mod}+w+4" = "workspace number $ws4";
         "${mod}+w+5" = "workspace number $ws5";
 
-        "${mod}+w+Shift+1" = "move container to workspace number $ws1";
-        "${mod}+w+Shift+2" = "move container to workspace number $ws2";
-        "${mod}+w+Shift+3" = "move container to workspace number $ws3";
-        "${mod}+w+Shift+4" = "move container to workspace number $ws4";
-        "${mod}+w+Shift+5" = "move container to workspace number $ws5";
+        "${mod}+Shift+w+1" = "move container to workspace number $ws1";
+        "${mod}+Shift+w+2" = "move container to workspace number $ws2";
+        "${mod}+Shift+w+3" = "move container to workspace number $ws3";
+        "${mod}+Shift+w+4" = "move container to workspace number $ws4";
+        "${mod}+Shift+w+5" = "move container to workspace number $ws5";
         # Audio
         "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume 0 +5%";
         "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume 0 -5%";

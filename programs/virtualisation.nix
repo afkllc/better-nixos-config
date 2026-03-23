@@ -39,6 +39,8 @@
         };
     };
 
+    networking.nat.enable = true;
+
     networking.firewall.trustedInterfaces = [ "vmbr0" ];
 
     networking.nat.internalInterfaces = [ "vmbr0" ];

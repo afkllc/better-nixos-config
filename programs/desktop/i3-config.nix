@@ -88,6 +88,9 @@ in
       ];
     };
     extraConfig = ''
+      export XDG_RUNTIME_DIR="/run/user/$UID"
+      export GNOME_KEYRING_CONTROL="$XDG_RUNTIME_DIR/keyring"
+      export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/keyring/ssh"
       exec --no-startup-id xset s 300 10
       exec --no-startup-id xset dpms 300 300 300
       exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy

@@ -56,7 +56,6 @@ in
         # Basic Keybinds
         "${mod}+d" = "exec --no-startup-id rofi -show drun";
         "${mod}+shift+d" = "exec --no-startup-id rofi -show window";
-        "${mod}+shift+e" = "exec --no-startup-id bash $HOME/.config/i3/exit-menu.sh";
 
         "${mod}+Shift+x" = "exec --no-startup-id i3lock-fancy";
         "${mod}+Return" = "exec xfce4-terminal";
@@ -97,17 +96,6 @@ in
       exec --no-startup-id nm-applet
     '';
   };
-
-  home.file.".config/i3/exit-menu.sh".text = ''
-    #!/usr/bin/env bash
-    echo -e "Exit i3\nReboot\nShutdown" \
-      | rofi -dmenu \
-      | xargs -r -I {} sh -c 'case {} in
-          Exit\ i3) i3-msg exit ;;
-          Reboot) reboot ;;
-          Shutdown) poweroff ;;
-        esac'
-  '';
 
   home.sessionVariables = {
     XDG_RUNTIME_DIR       = "/run/user/$UID";

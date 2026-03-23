@@ -56,6 +56,7 @@ in
         # Basic Keybinds
         "${mod}+d" = "exec --no-startup-id rofi -show drun";
         "${mod}+shift+d" = "exec --no-startup-id rofi -show window";
+        "${mod}+shift+e" = "echo -e 'Exit i3\nReboot\nShutdown' | rofi -dmenu | xargs -r -I {} sh -c 'case {} in Exit\ i3) i3-msg exit;; Reboot) reboot;; Shutdown) poweroff;; esac'";
 
         "${mod}+Shift+x" = "exec --no-startup-id i3lock-fancy";
         "${mod}+Return" = "exec xfce4-terminal";

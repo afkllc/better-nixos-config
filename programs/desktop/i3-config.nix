@@ -55,29 +55,7 @@ in
       keybindings = lib.mkOptionDefault {
         # Basic Keybinds
         "${mod}+d" = "exec --no-startup-id dmenu_run";
-        "${mod}+Shift+x" = ''
-          exec --no-startup-id i3lock-color \
-            --color=666699 \
-            --insidever-color=ffffff22 \
-            --ringver-color=ffffff88 \
-            --insidewrong-color=ff000022 \
-            --ringwrong-color=ff000088 \
-            --inside-color=00000000 \
-            --ring-color=ffffff55 \
-            --line-color=00000000 \
-            --separator-color=ffffff22 \
-            --verif-text="Checking..." \
-            --wrong-text="Wrong password" \
-            --noinput-text="No input" \
-            --lock-text="Locked" \
-            --time-str="%H:%M:%S" \
-            --date-str="%A, %d %B" \
-            --time-color=ffffff \
-            --date-color=ffffff \
-            --time-pos="x+0:y+50" \
-            --date-pos="x+0:y+80" \
-            --ind-pos="x+0:y+0"
-        '';
+        "${mod}+Shift+x" = "${mod}+Shift+x" = "exec --no-startup-id i3lock-fancy-rapid 5 3";
         "${mod}+Return" = "exec kitty";
         # Focus
         "${mod}+j" = "focus left";

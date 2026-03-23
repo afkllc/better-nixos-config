@@ -71,6 +71,7 @@ in
         "${mod}+Tab" = "layout tabbed";
 
         # Workspaces
+        "${mod}+w" = "nop";
         "${mod}+w+1" = "workspace number $ws1";
         "${mod}+w+2" = "workspace number $ws2";
         "${mod}+w+3" = "workspace number $ws3";

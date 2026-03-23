@@ -96,10 +96,4 @@ in
       exec --no-startup-id nm-applet
     '';
   };
-
-  home.file.".xsessionrc".text = ''
-    export XDG_RUNTIME_DIR="/run/user/$UID"
-    export GNOME_KEYRING_CONTROL="$XDG_RUNTIME_DIR/keyring"
-    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/keyring/ssh"
-  '';
 }

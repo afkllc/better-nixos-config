@@ -42,7 +42,7 @@
       enable = true;
       extraPackages = with pkgs; [
         dmenu # application launcher most people use
-        i3lock-color # default i3 screen locker
+        i3lock-fancy-rapid # default i3 screen locker
         i3blocks # if you are planning on using i3blocks over i3status
         rofi
       ];

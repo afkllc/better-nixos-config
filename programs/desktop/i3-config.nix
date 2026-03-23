@@ -6,6 +6,7 @@
 }:
 
 let
+  isLaptop = networking.hostName != "AH-W";
   mod = "Mod4";
 in
 {
@@ -13,7 +14,7 @@ in
     enable = true;
     bars = {
       top = {
-        battery = {
+        battery = lib.mkIf isLaptop {
           interval = 1;
           command = ''echo "Battery: $(acpi -b | grep -P -o '[0-9]+(?=%)')%"'';
         };
@@ -30,7 +31,7 @@ in
           command = ''echo "Memory: $(free -h | grep Mem | awk '{print $3}')"'';
         };
         volume = {
-          interval = 1;
+          interval = 0.5;
           command = ''echo "Volume: $(pactl list sinks | grep Volume | head -n1 | awk '{print $5}')"'';
         };
         user = {
@@ -62,35 +63,19 @@ in
 
         # Focus
         "${mod}+j" = "focus left";
-        "${mod}+k" = "focus down";
-        "${mod}+l" = "focus up";
+        "${mod}+k" = "focus up";
+        "${mod}+l" = "focus down";
         "${mod}+semicolon" = "focus right";
 
         # Move
         "${mod}+Shift+j" = "move left";
-        "${mod}+Shift+k" = "move down";
-        "${mod}+Shift+l" = "move up";
+        "${mod}+Shift+k" = "move up";
+        "${mod}+Shift+l" = "move down";
         "${mod}+Shift+semicolon" = "move right";
-
-        # Workspaces
-        "${mod}+Tab" = "layout tabbed";
-        "${mod}+w" = "nop";
-        "${mod}+w+1" = "workspace number $ws1";
-        "${mod}+w+2" = "workspace number $ws2";
-        "${mod}+w+3" = "workspace number $ws3";
-        "${mod}+w+4" = "workspace number $ws4";
-        "${mod}+w+5" = "workspace number $ws5";
-
-        "${mod}+Shift+w+1" = "move container to workspace number $ws1";
-        "${mod}+Shift+w+2" = "move container to workspace number $ws2";
-        "${mod}+Shift+w+3" = "move container to workspace number $ws3";
-        "${mod}+Shift+w+4" = "move container to workspace number $ws4";
-        "${mod}+Shift+w+5" = "move container to workspace number $ws5";
-
+        
         # Audio
         "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume 0 +5%";
         "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume 0 -5%";
-        "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute 0 toggle";
 
         # Screen Brightness
         "XF86MonBrightnessUp" = "exec xbacklight -inc 20";
@@ -104,14 +89,7 @@ in
       ];
     };
     extraConfig = ''
-      set $ws1 "Browser"
-      set $ws2 "2"
-      set $ws3 "3"
-      set $ws4 "4"
-      set $ws5 "5"
-
-      assign [class="firefox"] $ws1
-      exec --no-startup-id i3-msg "workspace 10"
+      exec --no-startup-id gnome-keyring
       exec --no-startup-id nm-applet
     '';
   };

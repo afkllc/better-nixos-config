@@ -55,7 +55,7 @@ in
       keybindings = lib.mkOptionDefault {
         # Basic Keybinds
         "${mod}+d" = "exec --no-startup-id dmenu_run";
-        "${mod}+Shift+x" = "exec sh -c 'i3lock -c 222222 & sleep 5 && xset dpms force off'";
+        "${mod}+Shift+x" = "exec sh -c 'i3lock -c 666699 & sleep 5 && xset dpms force off'";
         "${mod}+Return" = "exec kitty";
         # Focus
         "${mod}+j" = "focus left";
@@ -97,6 +97,16 @@ in
         }
       ];
     };
-    extraConfig = "\nexec --no-startup-id nm-applet";
+    extraConfig = ''
+      set $ws1 "1"
+      set $ws2 "2"
+      set $ws3 "3"
+      set $ws4 "4"
+      set $ws5 "5"
+
+      assign [class="Firefox"] $ws1
+      exec --no-startup-id i3-msg "workspace 10"
+      exec --no-startup-id nm-applet
+    '';
   };
 }

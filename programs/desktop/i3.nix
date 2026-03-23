@@ -10,6 +10,7 @@
     pulseaudio
     kitty
     feh
+    xfce4-terminal
   ];
 
   services.pipewire = {

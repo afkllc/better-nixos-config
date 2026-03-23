@@ -58,21 +58,22 @@ in
         "${mod}+shift+d" = "exec --no-startup-id rofi -show window";
 
         "${mod}+Shift+x" = "exec --no-startup-id i3lock-fancy";
-        "${mod}+Return" = "exec kitty";
+        "${mod}+Return" = "exec xfce4-terminal";
+
         # Focus
         "${mod}+j" = "focus left";
         "${mod}+k" = "focus down";
         "${mod}+l" = "focus up";
         "${mod}+semicolon" = "focus right";
+
         # Move
         "${mod}+Shift+j" = "move left";
         "${mod}+Shift+k" = "move down";
         "${mod}+Shift+l" = "move up";
         "${mod}+Shift+semicolon" = "move right";
 
-        "${mod}+Tab" = "layout tabbed";
-
         # Workspaces
+        "${mod}+Tab" = "layout tabbed";
         "${mod}+w" = "nop";
         "${mod}+w+1" = "workspace number $ws1";
         "${mod}+w+2" = "workspace number $ws2";
@@ -85,13 +86,15 @@ in
         "${mod}+Shift+w+3" = "move container to workspace number $ws3";
         "${mod}+Shift+w+4" = "move container to workspace number $ws4";
         "${mod}+Shift+w+5" = "move container to workspace number $ws5";
+
         # Audio
         "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume 0 +5%";
         "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume 0 -5%";
         "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute 0 toggle";
+
         # Screen Brightness
         "XF86MonBrightnessUp" = "exec xbacklight -inc 20";
-        "XF86MonBrightnessDown" = " exec xbacklight -dec 20";
+        "XF86MonBrightnessDown" = "exec xbacklight -dec 20";
       };
       bars = [
         {

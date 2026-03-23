@@ -6,8 +6,6 @@
 }:
 
 let
-  hostName = builtins.readFile "/etc/hostname";
-  isLaptop = hostName != "AH-W";
   mod = "Mod4";
 in
 {
@@ -15,7 +13,7 @@ in
     enable = true;
     bars = {
       top = {
-        battery = lib.mkIf isLaptop {
+        battery = {
           interval = 1;
           command = ''echo "Battery: $(acpi -b | grep -P -o '[0-9]+(?=%)')%"'';
         };

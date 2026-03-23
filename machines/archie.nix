@@ -84,7 +84,7 @@
   hardware.bluetooth.powerOnBoot = true;
 
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = "nix-command flakes pipe-operators";
+  nix.settings.experimental-features = "nix-command flakes";
   nix.settings.trusted-users = [ "archie" ];
 
   time.timeZone = "Europe/London";

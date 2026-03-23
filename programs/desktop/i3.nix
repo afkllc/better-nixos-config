@@ -11,6 +11,7 @@
     kitty
     feh
     xfce4-terminal
+    gcr
   ];
 
   services.pipewire = {

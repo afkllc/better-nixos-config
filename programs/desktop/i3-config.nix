@@ -54,8 +54,9 @@ in
       };
       keybindings = lib.mkOptionDefault {
         # Basic Keybinds
-        "${mod}+d" = "exec --no-startup-id 'rofi -show drun'";
-        "${mod}+shift+d" = "exec --no-startup-id 'rofi -show window'";
+        "${mod}+d" = "exec --no-startup-id rofi -show drun";
+        "${mod}+shift+d" = "exec --no-startup-id rofi -show window";
+
         "${mod}+Shift+x" = "exec --no-startup-id i3lock-fancy";
         "${mod}+Return" = "exec kitty";
         # Focus

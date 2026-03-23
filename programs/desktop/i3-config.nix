@@ -88,7 +88,7 @@ in
       ];
     };
     extraConfig = ''
-      exec --no-startup-id gnome-keyring
+      exec --no-startup-id gnome-keyring-daemon --start --components=ssh,secrets,pkcs11
       exec --no-startup-id nm-applet
     '';
   };

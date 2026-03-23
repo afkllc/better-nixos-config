@@ -6,7 +6,8 @@
 }:
 
 let
-  isLaptop = networking.hostName != "AH-W";
+  hostName = builtins.readFile "/etc/hostname" |> builtins.trim;
+  isLaptop = hostName != "AH-W";
   mod = "Mod4";
 in
 {

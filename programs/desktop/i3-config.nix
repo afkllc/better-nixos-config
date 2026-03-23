@@ -101,13 +101,13 @@ in
       ];
     };
     extraConfig = ''
-      set $ws1 "1"
+      set $ws1 "Browser"
       set $ws2 "2"
       set $ws3 "3"
       set $ws4 "4"
       set $ws5 "5"
 
-      assign [class="Firefox"] $ws1
+      assign [class="firefox"] $ws1
       exec --no-startup-id i3-msg "workspace 10"
       exec --no-startup-id nm-applet
     '';

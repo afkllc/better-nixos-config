@@ -1,6 +1,9 @@
 { pkgs, ... }:
 
 {
+  environment.systemPackages = with pkgs; [
+    networkmanagerapplet
+  ];
   networking.networkmanager.enable = true;
   services.tailscale.enable = true;
   networking.resolvconf.enable = true;

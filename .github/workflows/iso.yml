@@ -35,7 +35,7 @@ jobs:
         run: nix build .#nixosConfigurations.iso.config.system.build.isoImage
 
       - name: Release ISO
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/master'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: master-${{ github.sha }}

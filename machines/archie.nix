@@ -20,6 +20,8 @@
     #../programs/cachix.nix
   ];
 
+  services.logind.powerKey = "hibernate";
+
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   boot.binfmt.registrations."aarch64-linux".fixBinary = true;
 

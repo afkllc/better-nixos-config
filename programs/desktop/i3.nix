@@ -13,7 +13,7 @@
     autorandr
   ];
 
-  services.xserver.libinput.naturalScrolling = true;
+  services.libinput.touchpad.naturalScrolling = true;
 
   services.udev.extraRules = ''
     ACTION=="change", SUBSYSTEM=="drm", RUN+="${pkgs.autorandr}/bin/autorandr --change"

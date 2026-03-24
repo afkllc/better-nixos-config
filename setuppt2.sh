@@ -102,7 +102,7 @@ swapon "$swap"
 echo "Installing system..."
 mkdir -p /mnt/etc
 git clone --depth 1 --branch "$branch" \
-    https://github.com/iLikeToCode/nixos-config \
+    https://github.com/afkllc/better-nixos-config \
     /mnt/etc/nixos
 
 nixos-install --flake "/mnt/etc/nixos#$config" --no-root-password

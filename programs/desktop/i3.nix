@@ -50,7 +50,7 @@
       extraPackages = with pkgs; [
         i3lock-fancy
         i3blocks
-        rofi
+        (pkgs.callPackage ../packages/rofi.nix {})
         xss-lock
         xfce4-terminal
       ];

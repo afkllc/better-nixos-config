@@ -113,6 +113,7 @@
     slack
     slack-term
     trayscale
+    btop
   ];
 
   system.stateVersion = "26.05";

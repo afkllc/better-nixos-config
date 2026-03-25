@@ -17,6 +17,7 @@
     ../programs/apps/node.nix
     ../programs/networking.nix
     ../programs/apps/flatpak.nix
+    ../programs/desktop/kde.nix
     #../programs/cachix.nix
   ];
 

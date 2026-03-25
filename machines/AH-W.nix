@@ -2,14 +2,13 @@
 {
   imports = [
     ./archie.nix
-    ../programs/apps/discord.nix
     ../programs/desktop/i3.nix
   ];
 
   networking.nat.enable = true;
   networking.nat.externalInterface = "enp5s0";
 
-  system.autoUpgrade.flake = lib.mkForce "git+https://github.com/iLikeToCode/nixos-config#ah-w";
+  system.autoUpgrade.flake = lib.mkForce "git+https://github.com/afkllc/better-nixos-config#ah-w";
 
   services.xrdp.enable = true;
   services.xrdp.defaultWindowManager = "i3";

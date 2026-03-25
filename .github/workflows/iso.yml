@@ -26,11 +26,6 @@ jobs:
       - name: Install Nix
         uses: cachix/install-nix-action@v27
 
-      - name: Configure Cachix
-        uses: cachix/cachix-action@v14
-        with:
-          name: utcsheffield
-
       - name: Build NixOS ISO
         run: nix build .#nixosConfigurations.iso.config.system.build.isoImage
 

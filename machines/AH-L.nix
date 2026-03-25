@@ -2,7 +2,6 @@
 {
   imports = [
     ./archie.nix
-    ../programs/apps/discord.nix
     ../programs/desktop/i3.nix
   ];
 
@@ -22,7 +21,7 @@
     options iwlwifi uapsd_disable=1
   '';
 
-  system.autoUpgrade.flake = lib.mkForce "git+https://github.com/iLikeToCode/nixos-config#ah-l";
+  system.autoUpgrade.flake = lib.mkForce "git+https://github.com/afkllc/better-nixos-config#ah-l";
 
   networking.hostName = "AH-L";
 }

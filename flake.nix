@@ -33,7 +33,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = false;
-              home-manager.users.archie = ./home-manager/archie.nix;
+              home-manager.users.isa = ./home-manager/archie.nix;
             }
           ];
         };
@@ -47,7 +47,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = false;
-              home-manager.users.archie = ./home-manager/archie.nix;
+              home-manager.users.isa = ./home-manager/archie.nix;
             }
           ];
         };
@@ -60,7 +60,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = false;
-              home-manager.users.archie = ./home-manager/archie.nix;
+              home-manager.users.isa = ./home-manager/archie.nix;
             }
           ];
         };
@@ -73,7 +73,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = false;
-              home-manager.users.archie = ./home-manager/archie.nix;
+              home-manager.users.isa = ./home-manager/archie.nix;
             }
           ];
         };

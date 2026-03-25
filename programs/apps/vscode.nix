@@ -5,14 +5,11 @@
     ((pkgs.callPackage ./vscode-with-extensions.nix {}).override {
       vscode = pkgs.vscode;
       vscodeExtensions = with pkgs.vscode-extensions; [
-        golang.go
         bbenoist.nix
         bradlc.vscode-tailwindcss
         editorconfig.editorconfig
         christian-kohler.npm-intellisense
         astro-build.astro-vscode
-
-        rust-lang.rust-analyzer
         
         # ── Python ───────────────────────────────────
         ms-python.python
@@ -38,7 +35,6 @@
 
         # ── Formatting / Web ─────────────────────────
         esbenp.prettier-vscode
-        dbaeumer.vscode-eslint
         ms-python.flake8
         humao.rest-client
         ritwickdey.liveserver
@@ -51,7 +47,6 @@
         # ── Containers / Remote ──────────────────────
         ms-azuretools.vscode-docker
         ms-vscode-remote.remote-ssh
-        ms-vscode-remote.remote-containers
 
         # ── Misc Nice-to-have ────────────────────────
         johnpapa.vscode-peacock

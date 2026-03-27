@@ -2,7 +2,6 @@
 {
   imports = [
     ./archie.nix
-    ../programs/desktop/i3.nix
   ];
 
   networking.nat.enable = true;
